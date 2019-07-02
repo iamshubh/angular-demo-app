@@ -1,0 +1,51 @@
+<mat-toolbar color="primary">
+    Register
+    <span class="flex-spacer"></span>
+    <button mat-button mat-dialog-close>
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+
+<form novalidate #regForm="ngForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+
+        <div fxLayout="row nowrap" fxLayout.lt-sm="column" fxLayoutAlign="flex-start">
+            <mat-form-field fxFlex="1 0 auto">
+                <input matInput placeholder="First Name" type="text" [(ngModel)]="user.firstName" name="fName"
+                    #fName="ngModel" required>
+                <mat-error *ngIf="fName.errors?.required">email is required</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex="1 0 auto">
+                <input matInput placeholder="Last Name" type="text" [(ngModel)]="user.lastName" name="lName"
+                    #lName="ngModel">
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="column wrap" fxLayoutAlign="flex-start">
+
+            <mat-form-field fxFlex="1 0 auto">
+                <input matInput placeholder="Email" type="email" [(ngModel)]="user.email" name="email" #email="ngModel"
+                    required>
+                <mat-error *ngIf="email.errors?.required">email is required</mat-error>
+            </mat-form-field>
+            <mat-form-field fxFlex="1 0 auto">
+                <input matInput placeholder="Password" type="password" [(ngModel)]="user.password" name="password"
+                    #password="ngModel" required>
+                <mat-error *ngIf="password.errors?.required">Password is required</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div *ngIf="errMess">
+            <h4 class="error">{{errMess}}</h4>
+        </div>
+
+        <mat-checkbox [(ngModel)]="loginNow" name="loginNow">Login Now</mat-checkbox>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <span class="flex-spacer"></span>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button type="submit" mat-button class="background-primary text-floral-white"
+            [disabled]="regForm.form.invalid">Register</button>
+    </mat-dialog-actions>
+</form>

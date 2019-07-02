@@ -1,0 +1,40 @@
+<mat-toolbar color="primary">
+  Login
+  <span class="flex-spacer"></span>
+  <button mat-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-toolbar>
+
+<form novalidate #loginForm="ngForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <p>
+      <mat-form-field>
+        <input matInput placeholder="Email" type="email" [(ngModel)]="user.email" name="email" #email="ngModel"
+          required>
+        <mat-error *ngIf="email.errors?.required">email is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Password" type="password" [(ngModel)]="user.password" name="password"
+          #password="ngModel" required>
+        <mat-error *ngIf="password.errors?.required">Password is required</mat-error>
+      </mat-form-field>
+    </p>
+
+      <div *ngIf="errMess">
+        <h4 class="error">{{errMess}}</h4>
+      </div>
+      
+      <mat-checkbox [(ngModel)]="user.remember" name="remember">Remember Me</mat-checkbox>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <span class="flex-spacer"></span>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button type="submit" mat-button class="background-primary text-floral-white"
+      [disabled]="loginForm.form.invalid">Login</button>
+  </mat-dialog-actions>
+</form>
+
+<div class="register">
+  <a mat-button color="primary" (click)="registerUser()"><span class="fa fa-sign-out fa-lg"></span> SignUp here!</a>
+</div>
