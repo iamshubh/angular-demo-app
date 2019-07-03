@@ -7,3 +7,17 @@ $background-moredark: #4527A0;
 .active {
   background: $background-moredark;
 }
+
+.header-bg p {
+  color: aliceblue;
+  margin: 10px
+}
+
+#cartCount{
+  font-style: bold;
+  font-weight: bold;
+  font-size: small;
+  color: antiquewhite;
+  margin: 2px;
+  padding: 2px;
+}

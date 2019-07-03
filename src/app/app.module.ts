@@ -16,6 +16,10 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
+import { OrdersComponent } from './components/orders/orders.component';
+import { CartComponent } from './components/cart/cart.component';
+import { AccountComponent } from './components/account/account.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 
 @NgModule({
@@ -28,7 +32,11 @@ import { RegisterComponent } from './components/register/register.component';
     MainComponent,
     LoginComponent,
     AboutUsComponent,
-    RegisterComponent
+    RegisterComponent,
+    OrdersComponent,
+    CartComponent,
+    AccountComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

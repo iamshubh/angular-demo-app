@@ -1,1 +1,21 @@
-<p>home works!</p>
+<!-- <div *ngFor="let item of items">
+    <p>{{item.name}}</p>
+</div> -->
+
+<div class="shopping-items">
+    <mat-card class='shop-item' *ngFor="let item of items">
+        <img class="mat-card-image" src="{{ baseImgUrl + item.image}}" alt="{{item.description}}">
+        <mat-card-content class="shop-item-title">
+            {{item.name}}
+        </mat-card-content>
+
+        <mat-card-actions>
+            <div class="add-remove-div">
+                <p class="item-price">Rs. {{item.price}}</p>
+                <button mat-raised-button color="primary" *ngIf="!item.added" (click)="addToCart(item)">Add</button>
+                <button mat-raised-button color="warn" *ngIf="item.added" (click)="removeFromCart(item)">Remove</button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+
+</div>

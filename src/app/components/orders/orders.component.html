@@ -1,0 +1,22 @@
+<div *ngFor="let ordered of allOrders" class="all-orders">
+    <mat-list>
+        <h3 mat-subheader>Ordered Items</h3>
+        <p class="flex-item"> {{ordered.date | date}} </p>
+        <hr>
+        <mat-list-item *ngFor="let item of ordered.items">
+            <div class="flex-container">
+                <img class="flex-item" src="{{ baseImgUrl + item.image}}" alt="{{item.description}}">
+                <h4 class="flex-item">{{item.productName}}</h4>
+                <strong class="flex-item">Rs. {{item.price}}</strong>
+            </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    </mat-list>
+</div>
+
+<div [hidden]="allOrders.length > 0" class="no-orders">
+    <p> You haven't placed any order yet!
+    </p>
+    <br>
+    <button mat-raised-button (click)="goToAllItems()" color="primary">Go to all items</button>
+</div>

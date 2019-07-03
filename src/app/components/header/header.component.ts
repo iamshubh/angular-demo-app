@@ -4,6 +4,7 @@ import { LoginComponent } from '../login/login.component';
 import { MatDialog } from '@angular/material';
 import { AuthService } from 'src/app/services/auth.service';
 import { RegisterComponent } from '../register/register.component';
+import { CartService } from '@/services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -13,19 +14,34 @@ import { RegisterComponent } from '../register/register.component';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   username: string = undefined;
-  subscription: Subscription;
+  authSubscription: Subscription;
+  cartSubscription: Subscription;
+  itemCount: string = undefined;
 
   constructor(public dialog: MatDialog,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private cartService: CartService) { }
 
   ngOnInit() {
     this.username = this.authService.getLoggedUsername();
-    this.subscription = this.authService.getUsername()
+    this.authSubscription = this.authService.getUsername()
       .subscribe(name => { console.log(name); this.username = name; });
+
+    this.cartSubscription = this.cartService.getCartUpdation().subscribe(items => {
+      console.log("cart items:\t" + items)
+      if (items) {
+        if (items.length > 0) {
+          this.itemCount = items.length.toString()
+        } else {
+          this.itemCount = undefined;
+        }
+      }
+    })
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.authSubscription.unsubscribe();
+    this.cartSubscription.unsubscribe();
   }
 
   openLoginSignUpForm() {

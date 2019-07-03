@@ -1,0 +1,15 @@
+.alert > .close {
+    line-height: 0;
+}
+
+.alert {
+    padding: .5rem 1rem;
+    min-width: 60%;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    z-index: 999;
+}

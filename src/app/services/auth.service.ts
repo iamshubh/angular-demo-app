@@ -10,12 +10,13 @@ export class AuthService {
   private static readonly keyUsers = 'users';
   private static readonly keyLoggedIn = 'loggedIn';
   private username: Subject<string> = new Subject<string>();
-  private users: User[] = []
-  private isLoggedIn: boolean = false;
+  private users: User[] = JSON.parse(localStorage.getItem('users')) || [];
+  private loggedInUser: User = undefined;
 
   constructor() {
     const usrs = localStorage.getItem(AuthService.keyUsers);
     if (!usrs) {
+      // TODO : for testing
       console.log("added 2 default users")
       localStorage.setItem(AuthService.keyUsers, JSON.stringify(defUsers));
       this.users = defUsers;
@@ -31,7 +32,7 @@ export class AuthService {
   }
 
   isUserLoggedIn(): boolean {
-    return this.getLoggedUsername() != null || this.isLoggedIn
+    return this.getLoggedUsername() != null || this.loggedInUser !=  undefined
   }
 
   deleteUserCredentials(user: User) {
@@ -48,33 +49,36 @@ export class AuthService {
       this.users.push(user);
       localStorage.setItem(AuthService.keyUsers, JSON.stringify(this.users))
       if (loginNow) {
-        this.isLoggedIn = true;
-        this.sendUsername(user.firstName);
+        localStorage.setItem(AuthService.keyLoggedIn, usr.firstName)
+        this.loggedInUser = usr;
+        this.sendUsername(usr.firstName);
       }
     }
     return usr == undefined
   }
 
   logIn(user: any): boolean {
-    const usr = this.users.find(usr => usr.email == user && usr.password == user.password)
+    const usr = this.users.find(usr => usr.email == user.email && usr.password == user.password)
     if (usr) {
-      if (user.remember) {
-        localStorage.setItem(AuthService.keyLoggedIn, usr.firstName)
-      }
-      this.isLoggedIn = true;
+      localStorage.setItem(AuthService.keyLoggedIn, usr.firstName)
+      this.loggedInUser = usr;
       this.sendUsername(usr.firstName)
     }
     return usr != undefined
   }
 
   logOut() {
-    this.isLoggedIn = false;
+    this.loggedInUser = undefined;
     localStorage.removeItem(AuthService.keyLoggedIn)
     this.clearUsername();
   }
 
   getLoggedUsername(): string | null {
     return localStorage.getItem(AuthService.keyLoggedIn)
+  }
+
+  getLoggedUserId(): string| undefined {
+    return this.loggedInUser ? this.loggedInUser.email : undefined
   }
 
   getUsername(): Observable<string> {
