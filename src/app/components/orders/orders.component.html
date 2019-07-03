@@ -14,9 +14,9 @@
     </mat-list>
 </div>
 
-<div [hidden]="allOrders.length > 0" class="no-orders">
-    <p> You haven't placed any order yet!
-    </p>
+<div *ngIf="allOrders.length == 0" class="flex-empty-view">
+    <h2 class="fa fa-shopping-bag fa-lg flex-empty-view-item"> You haven't ordered yet! </h2>
+    
     <br>
-    <button mat-raised-button (click)="goToAllItems()" color="primary">Go to all items</button>
+    <button class="flex-empty-view-item" mat-raised-button (click)="goToShop()" color="primary">Go to Shop</button>
 </div>

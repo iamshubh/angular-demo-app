@@ -54,4 +54,8 @@ export class CartComponent implements OnInit {
 
     this.router.navigate(['/home'])
   }
+
+  goToShop() {
+    this.router.navigate(['/home'])
+  }
 }

@@ -2,15 +2,29 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 $lt-gray: #ddd;
-$background-dark: #512DA8;
-$background-light: #9575CD;
-$background-pale: #D1C4E9;
-$background-moredark: #4527A0;
+$background-dark: #512da8;
+$background-light: #9575cd;
+$background-pale: #d1c4e9;
+$background-moredark: #4527a0;
 
 .flex-spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
 
 mat-list {
-    padding: 20px
+  padding: 20px;
+}
+
+.flex-empty-view {
+  margin-top: 50px;
+  font-weight: bold;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-empty-view-item {
+  flex: 0 1 auto;
+  margin: 10px;
 }

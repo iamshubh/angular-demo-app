@@ -17,6 +17,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private cartService: CartService, private authService: AuthService) { }
 
   ngOnInit() {
+    this.items = allItems;
+    this.items.forEach(item => item.added = false);
+
     this.cartSubscription = this.cartService.getCartUpdation().subscribe(items => {
       if (items && items.length == 0) {
         this.items = allItems;

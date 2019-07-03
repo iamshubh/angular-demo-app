@@ -39,8 +39,7 @@ export class OrdersComponent implements OnInit {
     this.allOrders = this.orderHistoryService.getUserOrders();
   }
 
-  goToAllItems() {
-    // redirect to all items screen
+  goToShop() {
     this.router.navigate(['/home'])
   }
 

@@ -27,10 +27,11 @@ export class CartService {
     // this.cartUpdate.next(cart[userId]);
 
     this.cart.push(item);
+    this.cartUpdate.next(this.cart);
+
     console.log("after addition cart:\t" +  JSON.stringify(this.cart));
     let a = JSON.stringify(this.cart);
     localStorage.setItem(CartService.keyCarts, JSON.stringify(this.cart));
-    this.cartUpdate.next(this.cart);
   }
 
   removeItem(userId: string, item: Item) {
@@ -60,9 +61,9 @@ export class CartService {
 
     this.cart=[]
     console.log("empty-cart"+this.cart)
-    localStorage.setItem("cart", JSON.stringify(this.cart))
     this.cartUpdate.next([]);
 
+    localStorage.setItem("cart", JSON.stringify(this.cart))
   }
 
   getItems(userId: string): Item[] {

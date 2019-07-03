@@ -1,4 +1,4 @@
-<mat-list>
+<mat-list *ngIf="cartItems && cartItems.length > 0">
     <h2 mat-header>Cart Items</h2>
     <hr>
     <mat-list-item *ngFor="let item of cartItems">
@@ -10,9 +10,14 @@
             <mat-divider></mat-divider>
         </div>
     </mat-list-item>
+    <div class="checkout">
+        <h2>Total amount: {{total}}/-</h2>
+        <button mat-raised-button (click)="onCheckOut()" color="primary">Proceed to checkout</button>
+    </div>
 </mat-list>
 
-<div class="checkout">
-    <h2>Total amount: {{total}}/-</h2>
-    <button mat-raised-button (click)="onCheckOut()" color="primary">Proceed to checkout</button>
+<div *ngIf="cartItems.length == 0" class="flex-empty-view">
+    <h2 class="fa fa-shopping-cart fa-lg flex-empty-view-item"> Cart is empty! </h2>
+    <br>
+    <button class="flex-empty-view-item" mat-raised-button (click)="goToShop()" color="primary">Go to Shop</button>
 </div>
